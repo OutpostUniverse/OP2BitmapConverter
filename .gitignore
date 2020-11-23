@@ -1,0 +1,14 @@
+*.aps
+*.suo
+*.db
+*.opendb
+*.user
+.vs
+.build/
+x64
+Debug
+Release
+VisualStudio
+Makefile
+
+
