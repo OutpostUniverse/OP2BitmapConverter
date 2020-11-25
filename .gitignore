@@ -3,8 +3,8 @@
 *.db
 *.opendb
 *.user
-.vs/
 .build/
+.vs/
 x64/
 Debug/
 Release/
