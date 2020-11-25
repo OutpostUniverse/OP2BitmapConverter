@@ -1,0 +1,32 @@
+version: 2
+
+commands:
+  build:
+    steps:
+      - checkout
+      - run: git submodule update --init
+      - run: make --keep-going --jobs 2 op2utility
+      - run: make --keep-going --jobs 2
+
+jobs:
+  gcc:
+    docker:
+      - image: outpostuniverse/op2utility:1.1
+    environment:
+      CXX: g++
+    steps:
+      - build
+  clang:
+    docker:
+      - image: outpostuniverse/op2utility:1.1
+    environment:
+      CXX: clang++
+    steps:
+      - build
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - gcc
+      - clang
