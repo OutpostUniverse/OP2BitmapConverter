@@ -3,12 +3,11 @@
 *.db
 *.opendb
 *.user
-.vs
 .build/
-x64
-Debug
-Release
+.vs/
+x64/
+Debug/
+Release/
 VisualStudio
 Makefile
-
-
+OP2BitmapConverter
