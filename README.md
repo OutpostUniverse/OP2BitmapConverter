@@ -1,5 +1,11 @@
 # OP2BitmapConverter
 
+---
+
+**NOTE**: This is a new project which is not yet functional. The description remains aspirational.
+
+---
+
 A cross platform console application to convert bitmaps from the Outpost 2 specific format to a more universal format. 
 
 Outpost 2 stores bitmaps in a unique format that is typically not supported by common bitmap viewing and bitmap editing software such as Microsoft Paint or Gimp. This console application allows converting and then saving the bitmaps into a standard format. 
