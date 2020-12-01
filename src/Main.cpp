@@ -1,4 +1,7 @@
+#include <gflags/gflags.h>
 #include <iostream>
+
+DEFINE_bool(AccessArchives, true, "Access Outpost 2 volume (.vol) files within the directory when searching for bitmaps");
 
 static const std::string version = "0.0.1";
 
@@ -6,6 +9,10 @@ void OutputHelp();
 
 int main(int argc, char **argv)
 {
+	gflags::SetUsageMessage("OP2BitmapConverter Sample Usage Message");
+	gflags::SetVersionString(version);
+	gflags::ParseCommandLineFlags(&argc, &argv, true);
+
 	OutputHelp();
 
 	return 0;
