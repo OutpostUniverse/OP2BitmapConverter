@@ -11,14 +11,14 @@ commands:
 jobs:
   gcc:
     docker:
-      - image: outpostuniverse/op2utility:1.1
+      - image: outpostuniverse/op2bitmapconverter:1.0
     environment:
       CXX: g++
     steps:
       - build
   clang:
     docker:
-      - image: outpostuniverse/op2utility:1.1
+      - image: outpostuniverse/op2bitmapconverter:1.0
     environment:
       CXX: clang++
     steps:
