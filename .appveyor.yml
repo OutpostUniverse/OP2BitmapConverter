@@ -12,3 +12,4 @@ install:
   - vcpkg install gflags:x64-windows-static
 build:
   project: OP2BitmapConverter.sln
+cache: c:\tools\vcpkg\installed\
