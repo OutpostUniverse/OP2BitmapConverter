@@ -10,7 +10,7 @@ UTILITYLIB := $(UTILITYDIR)/lib$(UTILITYBASE).a
 CPPFLAGS := -I $(UTILITYDIR)/include
 CXXFLAGS := -std=c++17 -g -Wall -Wno-unknown-pragmas
 LDFLAGS := -L$(UTILITYDIR)
-LDLIBS := -l$(UTILITYBASE) -lstdc++fs -lstdc++ -lm
+LDLIBS := -l$(UTILITYBASE) -lstdc++fs -lstdc++ -lm -lgflags
 
 DEPFLAGS = -MT $@ -MMD -MP -MF $(INTDIR)/$*.Td
 
