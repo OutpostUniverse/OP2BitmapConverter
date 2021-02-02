@@ -8,6 +8,7 @@
 x64/
 Debug/
 Release/
+packages/
 VisualStudio
 Makefile
 OP2BitmapConverter
