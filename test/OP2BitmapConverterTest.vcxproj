@@ -49,6 +49,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ConsoleArguments.test.cpp" />
     <ClCompile Include="test.cpp" />
   </ItemGroup>
   <ItemDefinitionGroup />
