@@ -1,19 +1,12 @@
+#include "ConsoleArguments.h"
 #include "OP2Utility.h"
 #include <iostream>
-#include <string>
 #include <stdexcept>
 
 using namespace OP2Utility;
 
 static const std::string version = "0.0.1";
 
-struct ConsoleArguments
-{
-	std::string sourcePath;
-	std::string destinationPath;
-};
-
-ConsoleArguments ParseConsoleArguments(int argc, char** argv);
 void OutputHelp();
 
 int main(int argc, char** argv)
@@ -32,19 +25,7 @@ int main(int argc, char** argv)
 	return 0;
 }
 
-ConsoleArguments ParseConsoleArguments(int argc, char** argv)
-{
-	if (argc > 3)
-	{
-		throw std::runtime_error("Too many command line arguments provided.");
-	}
-	if (argc < 3)
-	{
-		throw std::runtime_error("Too few command line arguments provided.");
-	}
 
-	return ConsoleArguments{ argv[1], argv[2] };
-}
 
 void OutputHelp()
 {
