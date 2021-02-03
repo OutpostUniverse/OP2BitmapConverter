@@ -40,15 +40,15 @@
     <IntDir>x86\$(Configuration)\</IntDir>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\OP2BitmapConverter.vcxproj">
-      <Project>{c3e96353-8151-405c-9611-0bb0fd76ea74}</Project>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ConsoleArguments.test.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\srcLibrary\OP2BitmapConverterLibrary.vcxproj">
+      <Project>{dcfc9cbb-4a4b-4559-acfe-6029103d88d1}</Project>
+    </ProjectReference>
   </ItemGroup>
   <ItemDefinitionGroup />
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

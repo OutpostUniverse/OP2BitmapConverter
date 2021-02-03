@@ -1,4 +1,4 @@
-#include "../src/ConsoleArguments.h"
+#include "../srcLibrary/ConsoleArguments.h"
 #include <gtest/gtest.h>
 #include <string>
 #include <stdexcept>
