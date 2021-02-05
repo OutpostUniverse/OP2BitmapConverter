@@ -14,7 +14,10 @@ int main(int argc, char** argv)
 	try {
 		auto consoleArguments = ParseConsoleArguments(argc, argv);
 
-		Tileset::ReadTileset(Stream::FileReader(consoleArguments.sourcePath)).WriteIndexed(consoleArguments.destinationPath);
+		ResourceManager resourceManager(XFile::GetDirectory(consoleArguments.sourcePath));
+
+		auto stream = resourceManager.GetResourceStream(XFile::GetFilename(consoleArguments.sourcePath));
+		Tileset::ReadTileset(*stream).WriteIndexed(consoleArguments.destinationPath);
 	}
 	catch (std::exception& e) {
 		std::cout << "An error was encountered. " << e.what() << std::endl << std::endl;
