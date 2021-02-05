@@ -7,6 +7,8 @@ using namespace OP2Utility;
 
 static const std::string version = "0.0.1";
 
+void ConvertTileset(Stream::BidirectionalReader& reader, std::string destination);
+void ConvertTilesetsInDirectory(ResourceManager& resourceManager, std::string destination);
 void OutputHelp();
 
 int main(int argc, char** argv)
@@ -16,8 +18,13 @@ int main(int argc, char** argv)
 
 		ResourceManager resourceManager(XFile::GetDirectory(consoleArguments.sourcePath));
 
-		auto stream = resourceManager.GetResourceStream(XFile::GetFilename(consoleArguments.sourcePath));
-		Tileset::ReadTileset(*stream).WriteIndexed(consoleArguments.destinationPath);
+		if (XFile::IsDirectory(consoleArguments.sourcePath)) {
+			ConvertTilesetsInDirectory(resourceManager, consoleArguments.destinationPath);
+		}
+		else {
+			auto stream = resourceManager.GetResourceStream(XFile::GetFilename(consoleArguments.sourcePath));
+			ConvertTileset(*stream, consoleArguments.destinationPath);
+		}
 	}
 	catch (std::exception& e) {
 		std::cout << "An error was encountered. " << e.what() << std::endl << std::endl;
@@ -28,7 +35,22 @@ int main(int argc, char** argv)
 	return 0;
 }
 
+void ConvertTileset(Stream::BidirectionalReader& reader, std::string destinationPath)
+{
+	Tileset::ReadTileset(reader).WriteIndexed(destinationPath);
+}
 
+void ConvertTilesetsInDirectory(ResourceManager& resourceManager, std::string destinationDirectory)
+{
+	auto filenames = resourceManager.GetAllFilenamesOfType(".bmp");
+
+	for (const auto& filename : filenames) {
+		auto stream = resourceManager.GetResourceStream(filename);
+		if (Tileset::PeekIsCustomTileset(*stream)) {
+			ConvertTileset(*stream, XFile::Append(destinationDirectory, filename));
+		}
+	}
+}
 
 void OutputHelp()
 {
