@@ -68,7 +68,7 @@ void ConvertTilesetsInDirectory(ResourceManager& resourceManager, std::string de
 void OutputHelp()
 {
 	std::cout << std::endl;
-	std::cout << "OP2BitmapConverter Ver " << version << std::endl;
+	std::cout << "OP2TilesetConverter Ver " << version << std::endl;
 	std::cout << "Developed by Hooman and Brett208 (Vagabond)" << std::endl;
 	std::cout << std::endl;
 	std::cout << "Convert bitmaps (bmps) from the Outpost 2 specific format into a standardized bitmap format." << std::endl;
