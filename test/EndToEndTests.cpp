@@ -35,10 +35,10 @@ TEST(EndToEnd, ImageConversion)
 // Return the relative directory where OP2BitmapConverter is compiled
 std::string getMsvcExeDirectory()
 {
-#ifdef _WIN64 && _DEBUG
+#if defined(_WIN64) && defined(_DEBUG)
 	return "..\\x64\\debug\\";
 #elif _WIN64
-	return "..\\x64\\release\\"
+	return "..\\x64\\release\\";
 #elif _DEBUG
 	return "..\\debug\\";
 #else
