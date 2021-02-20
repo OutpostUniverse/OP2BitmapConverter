@@ -1,19 +1,17 @@
 #include "../OP2Utility/include/OP2Utility.h"
 #include <gtest/gtest.h>
 #include <string>
+#include <iostream>
 
 using namespace OP2Utility;
 
-std::string getMsvcExeDirectory();
+// Filename of a .txt file containing the fully qualified path of the application under test (as it was just compiled)
+const std::string documentFilenameContainingApplicationUnderTestFilename("ApplicationPath.txt");
+std::string getApplicationName();
 
 TEST(EndToEnd, ImageConversion)
 {
-
-#ifdef _WIN32
-	const std::string applicationName = getMsvcExeDirectory() + "OP2BitmapConverter.exe";
-#else // Linux makefile
-	const std::string applicationName = "";
-#endif
+	const auto applicationName = getApplicationName();
 
 	const std::string startingTilesetFilename("TilesetTest.bmp");
 	const std::string customTilesetFilename("CustomTilesetTest.bmp");
@@ -32,16 +30,11 @@ TEST(EndToEnd, ImageConversion)
 	ASSERT_EQ(bitmap1, bitmap2);
 }
 
-// Return the relative directory where OP2BitmapConverter is compiled
-std::string getMsvcExeDirectory()
+std::string getApplicationName()
 {
-#if defined(_WIN64) && defined(_DEBUG)
-	return "..\\x64\\debug\\";
-#elif _WIN64
-	return "..\\x64\\release\\";
-#elif _DEBUG
-	return "..\\debug\\";
-#else
-	return "..\\release\\";
-#endif
+	std::ifstream file(documentFilenameContainingApplicationUnderTestFilename);
+	std::string applicationName;
+	std::getline(file, applicationName);
+
+	return applicationName;
 }

@@ -95,6 +95,12 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <PostBuildEvent>
+      <Command>echo $(TargetPath)&gt; "$(SolutionDir)test\ApplicationPath.txt"</Command>
+    </PostBuildEvent>
+    <PostBuildEvent>
+      <Message>Set executable path to a .txt for access by test code</Message>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -114,6 +120,12 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <PostBuildEvent>
+      <Command>echo $(TargetPath)&gt; "$(SolutionDir)test\ApplicationPath.txt"</Command>
+    </PostBuildEvent>
+    <PostBuildEvent>
+      <Message>Set executable path to a .txt for access by test code</Message>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -129,6 +141,12 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <PostBuildEvent>
+      <Command>echo $(TargetPath)&gt; "$(SolutionDir)test\ApplicationPath.txt"</Command>
+    </PostBuildEvent>
+    <PostBuildEvent>
+      <Message>Set executable path to a .txt for access by test code</Message>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -148,6 +166,12 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <PostBuildEvent>
+      <Command>echo $(TargetPath)&gt; "$(SolutionDir)test\ApplicationPath.txt"</Command>
+    </PostBuildEvent>
+    <PostBuildEvent>
+      <Message>Set executable path to a .txt for access by test code</Message>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src/Main.cpp" />
