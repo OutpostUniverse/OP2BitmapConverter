@@ -7,6 +7,7 @@ using namespace OP2Utility;
 
 static const std::string version = "0.0.1";
 
+void ConvertToCustomTileset(Stream::BidirectionalReader& reader, std::string destinationPath);
 void ConvertToBitmap(Stream::BidirectionalReader& reader, std::string destination);
 void ConvertTilesetsInDirectory(ResourceManager& resourceManager, std::string destination);
 void OutputHelp();
@@ -23,7 +24,13 @@ int main(int argc, char** argv)
 		}
 		else {
 			auto stream = resourceManager.GetResourceStream(XFile::GetFilename(consoleArguments.sourcePath));
-			ConvertTileset(*stream, consoleArguments.destinationPath);
+
+			if (BitmapFile::PeekIsBitmap(*stream)){
+				ConvertToCustomTileset(*stream, consoleArguments.destinationPath);
+			}
+			else {
+				ConvertToBitmap(*stream, consoleArguments.destinationPath);
+			}
 		}
 	}
 	catch (std::exception& e) {
@@ -33,6 +40,12 @@ int main(int argc, char** argv)
 	}
 
 	return 0;
+}
+
+void ConvertToCustomTileset(Stream::BidirectionalReader& reader, std::string destinationPath)
+{
+	auto writer = Stream::FileWriter(destinationPath);
+	Tileset::WriteCustomTileset(writer, BitmapFile::ReadIndexed(reader));
 }
 
 void ConvertToBitmap(Stream::BidirectionalReader& reader, std::string destinationPath)
