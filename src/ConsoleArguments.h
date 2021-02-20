@@ -2,6 +2,7 @@
 
 #include <string>
 #include <stdexcept>
+#include <cstddef>
 
 struct ConsoleArguments
 {
@@ -9,7 +10,7 @@ struct ConsoleArguments
 	std::string destinationPath;
 };
 
-inline ConsoleArguments ParseConsoleArguments(int argc, char** argv)
+inline ConsoleArguments ParseConsoleArguments(std::size_t argc, char** argv)
 {
 	if (argc > 3)
 	{
