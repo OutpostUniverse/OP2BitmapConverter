@@ -7,7 +7,8 @@ using namespace OP2Utility;
 
 static const std::string version = "0.0.1";
 
-void ConvertTileset(Stream::BidirectionalReader& reader, std::string destination);
+void ConvertToCustomTileset(Stream::BidirectionalReader& reader, std::string destinationPath);
+void ConvertToBitmap(Stream::BidirectionalReader& reader, std::string destination);
 void ConvertTilesetsInDirectory(ResourceManager& resourceManager, std::string destination);
 void OutputHelp();
 
@@ -23,7 +24,13 @@ int main(int argc, char** argv)
 		}
 		else {
 			auto stream = resourceManager.GetResourceStream(XFile::GetFilename(consoleArguments.sourcePath));
-			ConvertTileset(*stream, consoleArguments.destinationPath);
+
+			if (BitmapFile::PeekIsBitmap(*stream)){
+				ConvertToCustomTileset(*stream, consoleArguments.destinationPath);
+			}
+			else {
+				ConvertToBitmap(*stream, consoleArguments.destinationPath);
+			}
 		}
 	}
 	catch (std::exception& e) {
@@ -35,7 +42,13 @@ int main(int argc, char** argv)
 	return 0;
 }
 
-void ConvertTileset(Stream::BidirectionalReader& reader, std::string destinationPath)
+void ConvertToCustomTileset(Stream::BidirectionalReader& reader, std::string destinationPath)
+{
+	auto writer = Stream::FileWriter(destinationPath);
+	Tileset::WriteCustomTileset(writer, BitmapFile::ReadIndexed(reader));
+}
+
+void ConvertToBitmap(Stream::BidirectionalReader& reader, std::string destinationPath)
 {
 	Tileset::ReadTileset(reader).WriteIndexed(destinationPath);
 }
@@ -47,7 +60,7 @@ void ConvertTilesetsInDirectory(ResourceManager& resourceManager, std::string de
 	for (const auto& filename : filenames) {
 		auto stream = resourceManager.GetResourceStream(filename);
 		if (Tileset::PeekIsCustomTileset(*stream)) {
-			ConvertTileset(*stream, XFile::Append(destinationDirectory, filename));
+			ConvertToBitmap(*stream, XFile::Append(destinationDirectory, filename));
 		}
 	}
 }
@@ -55,7 +68,7 @@ void ConvertTilesetsInDirectory(ResourceManager& resourceManager, std::string de
 void OutputHelp()
 {
 	std::cout << std::endl;
-	std::cout << "OP2BitmapConverter Ver " << version << std::endl;
+	std::cout << "OP2TilesetConverter Ver " << version << std::endl;
 	std::cout << "Developed by Hooman and Brett208 (Vagabond)" << std::endl;
 	std::cout << std::endl;
 	std::cout << "Convert bitmaps (bmps) from the Outpost 2 specific format into a standardized bitmap format." << std::endl;
